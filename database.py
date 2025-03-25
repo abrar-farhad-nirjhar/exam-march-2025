@@ -2,463 +2,462 @@ from datetime import datetime, timedelta
 from interview.inventory.models import Inventory, InventoryLanguage, InventoryTag, InventoryType
 from interview.order.models import Order, OrderTag
 
-
 iso_langs = {
-    "ab":{
-        "name":"Abkhaz",
+    "ab": {
+        "name": "Abkhaz",
     },
-    "aa":{
-        "name":"Afar",
+    "aa": {
+        "name": "Afar",
     },
-    "af":{
-        "name":"Afrikaans",
+    "af": {
+        "name": "Afrikaans",
     },
-    "ak":{
-        "name":"Akan",
+    "ak": {
+        "name": "Akan",
     },
-    "sq":{
-        "name":"Albanian",
+    "sq": {
+        "name": "Albanian",
     },
-    "am":{
-        "name":"Amharic",
+    "am": {
+        "name": "Amharic",
     },
-    "ar":{
-        "name":"Arabic",
+    "ar": {
+        "name": "Arabic",
     },
-    "an":{
-        "name":"Aragonese",
+    "an": {
+        "name": "Aragonese",
     },
-    "hy":{
-        "name":"Armenian",
+    "hy": {
+        "name": "Armenian",
     },
-    "as":{
-        "name":"Assamese",
+    "as": {
+        "name": "Assamese",
     },
-    "av":{
-        "name":"Avaric",
+    "av": {
+        "name": "Avaric",
     },
-    "ae":{
-        "name":"Avestan",
+    "ae": {
+        "name": "Avestan",
     },
-    "ay":{
-        "name":"Aymara",
+    "ay": {
+        "name": "Aymara",
     },
-    "az":{
-        "name":"Azerbaijani",
+    "az": {
+        "name": "Azerbaijani",
     },
-    "bm":{
-        "name":"Bambara",
+    "bm": {
+        "name": "Bambara",
     },
-    "ba":{
-        "name":"Bashkir",
+    "ba": {
+        "name": "Bashkir",
     },
-    "eu":{
-        "name":"Basque",
+    "eu": {
+        "name": "Basque",
     },
-    "be":{
-        "name":"Belarusian",
+    "be": {
+        "name": "Belarusian",
     },
-    "bn":{
-        "name":"Bengali",
+    "bn": {
+        "name": "Bengali",
     },
-    "bh":{
-        "name":"Bihari",
+    "bh": {
+        "name": "Bihari",
     },
-    "bi":{
-        "name":"Bislama",
+    "bi": {
+        "name": "Bislama",
     },
-    "bs":{
-        "name":"Bosnian",
+    "bs": {
+        "name": "Bosnian",
     },
-    "br":{
-        "name":"Breton",
+    "br": {
+        "name": "Breton",
     },
-    "bg":{
-        "name":"Bulgarian",
+    "bg": {
+        "name": "Bulgarian",
     },
-    "my":{
-        "name":"Burmese",
+    "my": {
+        "name": "Burmese",
     },
-    "ch":{
-        "name":"Chamorro",
+    "ch": {
+        "name": "Chamorro",
     },
-    "ce":{
-        "name":"Chechen",
+    "ce": {
+        "name": "Chechen",
     },
-    "zh":{
-        "name":"Chinese",
+    "zh": {
+        "name": "Chinese",
     },
-    "cv":{
-        "name":"Chuvash",
+    "cv": {
+        "name": "Chuvash",
     },
-    "kw":{
-        "name":"Cornish",
+    "kw": {
+        "name": "Cornish",
     },
-    "co":{
-        "name":"Corsican",
+    "co": {
+        "name": "Corsican",
     },
-    "cr":{
-        "name":"Cree",
+    "cr": {
+        "name": "Cree",
     },
-    "hr":{
-        "name":"Croatian",
+    "hr": {
+        "name": "Croatian",
     },
-    "cs":{
-        "name":"Czech",
+    "cs": {
+        "name": "Czech",
     },
-    "da":{
-        "name":"Danish",
+    "da": {
+        "name": "Danish",
     },
-    "nl":{
-        "name":"Dutch",
+    "nl": {
+        "name": "Dutch",
     },
-    "en":{
-        "name":"English",
+    "en": {
+        "name": "English",
     },
-    "eo":{
-        "name":"Esperanto",
+    "eo": {
+        "name": "Esperanto",
     },
-    "et":{
-        "name":"Estonian",
+    "et": {
+        "name": "Estonian",
     },
-    "ee":{
-        "name":"Ewe",
+    "ee": {
+        "name": "Ewe",
     },
-    "fo":{
-        "name":"Faroese",
+    "fo": {
+        "name": "Faroese",
     },
-    "fj":{
-        "name":"Fijian",
+    "fj": {
+        "name": "Fijian",
     },
-    "fi":{
-        "name":"Finnish",
+    "fi": {
+        "name": "Finnish",
     },
-    "fr":{
-        "name":"French",
+    "fr": {
+        "name": "French",
     },
-    "gl":{
-        "name":"Galician",
+    "gl": {
+        "name": "Galician",
     },
-    "ka":{
-        "name":"Georgian",
+    "ka": {
+        "name": "Georgian",
     },
-    "de":{
-        "name":"German",
+    "de": {
+        "name": "German",
     },
-    "gn":{
-        "name":"Guaraní",
+    "gn": {
+        "name": "Guaraní",
     },
-    "gu":{
-        "name":"Gujarati",
+    "gu": {
+        "name": "Gujarati",
     },
-    "ha":{
-        "name":"Hausa",
+    "ha": {
+        "name": "Hausa",
     },
-    "he":{
-        "name":"Hebrew",
+    "he": {
+        "name": "Hebrew",
     },
-    "hz":{
-        "name":"Herero",
+    "hz": {
+        "name": "Herero",
     },
-    "hi":{
-        "name":"Hindi",
+    "hi": {
+        "name": "Hindi",
     },
-    "ho":{
-        "name":"Hiri Motu",
+    "ho": {
+        "name": "Hiri Motu",
     },
-    "hu":{
-        "name":"Hungarian",
+    "hu": {
+        "name": "Hungarian",
     },
-    "ia":{
-        "name":"Interlingua",
+    "ia": {
+        "name": "Interlingua",
     },
-    "id":{
-        "name":"Indonesian",
+    "id": {
+        "name": "Indonesian",
     },
-    "ie":{
-        "name":"Interlingue",
+    "ie": {
+        "name": "Interlingue",
     },
-    "ga":{
-        "name":"Irish",
+    "ga": {
+        "name": "Irish",
     },
-    "ig":{
-        "name":"Igbo",
+    "ig": {
+        "name": "Igbo",
     },
-    "ik":{
-        "name":"Inupiaq",
+    "ik": {
+        "name": "Inupiaq",
     },
-    "io":{
-        "name":"Ido",
+    "io": {
+        "name": "Ido",
     },
-    "is":{
-        "name":"Icelandic",
+    "is": {
+        "name": "Icelandic",
     },
-    "it":{
-        "name":"Italian",
+    "it": {
+        "name": "Italian",
     },
-    "iu":{
-        "name":"Inuktitut",
+    "iu": {
+        "name": "Inuktitut",
     },
-    "ja":{
-        "name":"Japanese",
+    "ja": {
+        "name": "Japanese",
     },
-    "jv":{
-        "name":"Javanese",
+    "jv": {
+        "name": "Javanese",
     },
-    "kn":{
-        "name":"Kannada",
+    "kn": {
+        "name": "Kannada",
     },
-    "kr":{
-        "name":"Kanuri",
+    "kr": {
+        "name": "Kanuri",
     },
-    "ks":{
-        "name":"Kashmiri",
+    "ks": {
+        "name": "Kashmiri",
     },
-    "kk":{
-        "name":"Kazakh",
+    "kk": {
+        "name": "Kazakh",
     },
-    "km":{
-        "name":"Khmer",
+    "km": {
+        "name": "Khmer",
     },
-    "rw":{
-        "name":"Kinyarwanda",
+    "rw": {
+        "name": "Kinyarwanda",
     },
-    "kv":{
-        "name":"Komi",
+    "kv": {
+        "name": "Komi",
     },
-    "kg":{
-        "name":"Kongo",
+    "kg": {
+        "name": "Kongo",
     },
-    "ko":{
-        "name":"Korean",
+    "ko": {
+        "name": "Korean",
     },
-    "ku":{
-        "name":"Kurdish",
+    "ku": {
+        "name": "Kurdish",
     },
-    "la":{
-        "name":"Latin",
+    "la": {
+        "name": "Latin",
     },
-    "lg":{
-        "name":"Luganda",
+    "lg": {
+        "name": "Luganda",
     },
-    "ln":{
-        "name":"Lingala",
+    "ln": {
+        "name": "Lingala",
     },
-    "lo":{
-        "name":"Lao",
+    "lo": {
+        "name": "Lao",
     },
-    "lt":{
-        "name":"Lithuanian",
+    "lt": {
+        "name": "Lithuanian",
     },
-    "lu":{
-        "name":"Luba-Katanga",
+    "lu": {
+        "name": "Luba-Katanga",
     },
-    "lv":{
-        "name":"Latvian",
+    "lv": {
+        "name": "Latvian",
     },
-    "gv":{
-        "name":"Manx",
+    "gv": {
+        "name": "Manx",
     },
-    "mk":{
-        "name":"Macedonian",
+    "mk": {
+        "name": "Macedonian",
     },
-    "mg":{
-        "name":"Malagasy",
+    "mg": {
+        "name": "Malagasy",
     },
-    "ms":{
-        "name":"Malay",
+    "ms": {
+        "name": "Malay",
     },
-    "ml":{
-        "name":"Malayalam",
+    "ml": {
+        "name": "Malayalam",
     },
-    "mt":{
-        "name":"Maltese",
+    "mt": {
+        "name": "Maltese",
     },
-    "mh":{
-        "name":"Marshallese",
+    "mh": {
+        "name": "Marshallese",
     },
-    "mn":{
-        "name":"Mongolian",
+    "mn": {
+        "name": "Mongolian",
     },
-    "na":{
-        "name":"Nauru",
+    "na": {
+        "name": "Nauru",
     },
-    "nd":{
-        "name":"North Ndebele",
+    "nd": {
+        "name": "North Ndebele",
     },
-    "ne":{
-        "name":"Nepali",
+    "ne": {
+        "name": "Nepali",
     },
-    "ng":{
-        "name":"Ndonga",
+    "ng": {
+        "name": "Ndonga",
     },
-    "nn":{
-        "name":"Norwegian Nynorsk",
+    "nn": {
+        "name": "Norwegian Nynorsk",
     },
-    "no":{
-        "name":"Norwegian",
+    "no": {
+        "name": "Norwegian",
     },
-    "ii":{
-        "name":"Nuosu",
+    "ii": {
+        "name": "Nuosu",
     },
-    "nr":{
-        "name":"South Ndebele",
+    "nr": {
+        "name": "South Ndebele",
     },
-    "oc":{
-        "name":"Occitan",
+    "oc": {
+        "name": "Occitan",
     },
-    "om":{
-        "name":"Oromo",
+    "om": {
+        "name": "Oromo",
     },
-    "or":{
-        "name":"Oriya",
+    "or": {
+        "name": "Oriya",
     },
-    "fa":{
-        "name":"Persian",
+    "fa": {
+        "name": "Persian",
     },
-    "pl":{
-        "name":"Polish",
+    "pl": {
+        "name": "Polish",
     },
-    "pt":{
-        "name":"Portuguese",
+    "pt": {
+        "name": "Portuguese",
     },
-    "qu":{
-        "name":"Quechua",
+    "qu": {
+        "name": "Quechua",
     },
-    "rm":{
-        "name":"Romansh",
+    "rm": {
+        "name": "Romansh",
     },
-    "rn":{
-        "name":"Kirundi",
+    "rn": {
+        "name": "Kirundi",
     },
-    "ru":{
-        "name":"Russian",
+    "ru": {
+        "name": "Russian",
     },
-    "sc":{
-        "name":"Sardinian",
+    "sc": {
+        "name": "Sardinian",
     },
-    "sd":{
-        "name":"Sindhi",
+    "sd": {
+        "name": "Sindhi",
     },
-    "se":{
-        "name":"Northern Sami",
+    "se": {
+        "name": "Northern Sami",
     },
-    "sm":{
-        "name":"Samoan",
+    "sm": {
+        "name": "Samoan",
     },
-    "sg":{
-        "name":"Sango",
+    "sg": {
+        "name": "Sango",
     },
-    "sr":{
-        "name":"Serbian",
+    "sr": {
+        "name": "Serbian",
     },
-    "sn":{
-        "name":"Shona",
+    "sn": {
+        "name": "Shona",
     },
-    "sk":{
-        "name":"Slovak",
+    "sk": {
+        "name": "Slovak",
     },
-    "sl":{
-        "name":"Slovene",
+    "sl": {
+        "name": "Slovene",
     },
-    "so":{
-        "name":"Somali",
+    "so": {
+        "name": "Somali",
     },
-    "st":{
-        "name":"Southern Sotho",
+    "st": {
+        "name": "Southern Sotho",
     },
-    "su":{
-        "name":"Sundanese",
+    "su": {
+        "name": "Sundanese",
     },
-    "sw":{
-        "name":"Swahili",
+    "sw": {
+        "name": "Swahili",
     },
-    "ss":{
-        "name":"Swati",
+    "ss": {
+        "name": "Swati",
     },
-    "sv":{
-        "name":"Swedish",
+    "sv": {
+        "name": "Swedish",
     },
-    "ta":{
-        "name":"Tamil",
+    "ta": {
+        "name": "Tamil",
     },
-    "te":{
-        "name":"Telugu",
+    "te": {
+        "name": "Telugu",
     },
-    "tg":{
-        "name":"Tajik",
+    "tg": {
+        "name": "Tajik",
     },
-    "th":{
-        "name":"Thai",
+    "th": {
+        "name": "Thai",
     },
-    "ti":{
-        "name":"Tigrinya",
+    "ti": {
+        "name": "Tigrinya",
     },
-    "tk":{
-        "name":"Turkmen",
+    "tk": {
+        "name": "Turkmen",
     },
-    "tl":{
-        "name":"Tagalog",
+    "tl": {
+        "name": "Tagalog",
     },
-    "tn":{
-        "name":"Tswana",
+    "tn": {
+        "name": "Tswana",
     },
-    "tr":{
-        "name":"Turkish",
+    "tr": {
+        "name": "Turkish",
     },
-    "ts":{
-        "name":"Tsonga",
+    "ts": {
+        "name": "Tsonga",
     },
-    "tt":{
-        "name":"Tatar",
+    "tt": {
+        "name": "Tatar",
     },
-    "tw":{
-        "name":"Twi",
+    "tw": {
+        "name": "Twi",
     },
-    "ty":{
-        "name":"Tahitian",
+    "ty": {
+        "name": "Tahitian",
     },
-    "uk":{
-        "name":"Ukrainian",
+    "uk": {
+        "name": "Ukrainian",
     },
-    "ur":{
-        "name":"Urdu",
+    "ur": {
+        "name": "Urdu",
     },
-    "uz":{
-        "name":"Uzbek",
+    "uz": {
+        "name": "Uzbek",
     },
-    "ve":{
-        "name":"Venda",
+    "ve": {
+        "name": "Venda",
     },
-    "vi":{
-        "name":"Vietnamese",
+    "vi": {
+        "name": "Vietnamese",
     },
-    "wa":{
-        "name":"Walloon",
+    "wa": {
+        "name": "Walloon",
     },
-    "cy":{
-        "name":"Welsh",
+    "cy": {
+        "name": "Welsh",
     },
-    "wo":{
-        "name":"Wolof",
+    "wo": {
+        "name": "Wolof",
     },
-    "fy":{
-        "name":"Western Frisian",
+    "fy": {
+        "name": "Western Frisian",
     },
-    "xh":{
-        "name":"Xhosa",
+    "xh": {
+        "name": "Xhosa",
     },
-    "yi":{
-        "name":"Yiddish",
+    "yi": {
+        "name": "Yiddish",
     },
-    "yo":{
-        "name":"Yoruba",
+    "yo": {
+        "name": "Yoruba",
     },
 }
 
 for key, lang in iso_langs.items():
     InventoryLanguage.objects.create(name=lang['name'])
-    
+
 inventory_tags = [
     dict(
         name='Action',
@@ -467,7 +466,7 @@ inventory_tags = [
         name='Adventure',
     ),
     dict(
-        name='Comedy',  
+        name='Comedy',
     ),
     dict(
         name='Drama',
@@ -476,7 +475,7 @@ inventory_tags = [
         name='Romance',
     ),
     dict(
-        name='Sci-Fi',  
+        name='Sci-Fi',
     ),
     dict(
         name='Thriller',
@@ -490,13 +489,14 @@ inventory_tag_dict = {}
 for tag in inventory_tags:
     name = tag['name']
     inventory_tag_dict[name] = InventoryTag.objects.create(**tag)
-    
-    
+
+
 inventory_types = ['Movie', 'Episode', 'Version']
 inventory_type_objects = {}
 for i, inv_type in enumerate(inventory_types):
-    inventory_type_objects[inv_type] = InventoryType.objects.create(name=inv_type)
-    
+    inventory_type_objects[inv_type] = InventoryType.objects.create(
+        name=inv_type)
+
 inventory_items = [
     [
         dict(
@@ -505,7 +505,8 @@ inventory_items = [
             type=inventory_type_objects['Version'],
             metadata=dict(
                 year=1999,
-                actors=['Keanu Reeves', 'Laurence Fishburne', 'Carrie-Anne Moss'],
+                actors=['Keanu Reeves', 'Laurence Fishburne',
+                        'Carrie-Anne Moss'],
                 imdb_rating=8.7,
                 rotten_tomatoes_rating=87,
             ),
@@ -519,7 +520,8 @@ inventory_items = [
             type=inventory_type_objects['Version'],
             metadata=dict(
                 year=2003,
-                actors=['Keanu Reeves', 'Laurence Fishburne', 'Carrie-Anne Moss'],
+                actors=['Keanu Reeves', 'Laurence Fishburne',
+                        'Carrie-Anne Moss'],
                 imdb_rating=7.2,
                 rotten_tomatoes_rating=73,
             )
@@ -533,7 +535,8 @@ inventory_items = [
             type=inventory_type_objects['Version'],
             metadata=dict(
                 year=2003,
-                actors=['Keanu Reeves', 'Laurence Fishburne', 'Carrie-Anne Moss'],
+                actors=['Keanu Reeves', 'Laurence Fishburne',
+                        'Carrie-Anne Moss'],
                 imdb_rating=6.7,
                 rotten_tomatoes_rating=59,
             )
@@ -631,7 +634,8 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -645,7 +649,8 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -659,7 +664,8 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -673,21 +679,23 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
         ),
         [inventory_tag_dict['Comedy']]
     ],
-    [  
+    [
         dict(
             name='Seinfeld Season 1 Episode 5',
             language_id=37,
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -701,7 +709,8 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -715,7 +724,8 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -729,7 +739,8 @@ inventory_items = [
             type=inventory_type_objects['Episode'],
             metadata=dict(
                 year=1990,
-                actors=['Jerry Seinfeld', 'Julia Louis-Dreyfus', 'Michael Richards'],
+                actors=['Jerry Seinfeld',
+                        'Julia Louis-Dreyfus', 'Michael Richards'],
                 imdb_rating=8.8,
                 rotten_tomatoes_rating=91,
             )
@@ -750,7 +761,7 @@ order_tags = [
         name='Austin'
     ),
     dict(
-        name='Dallas'   
+        name='Dallas'
     ),
     dict(
         name='Houston'
@@ -810,31 +821,37 @@ order_tags = [
 order_tag_dict = {}
 for tag in order_tags:
     order_tag_dict[tag['name']] = OrderTag.objects.create(**tag)
-    
+
 orders = [
     [
         dict(
-            inventory=Inventory.objects.get(name='The Lord of the Rings: The Fellowship of the Ring'),
+            inventory=Inventory.objects.get(
+                name='The Lord of the Rings: The Fellowship of the Ring'),
             start_date=datetime.now(),
             embargo_date=datetime.now() + timedelta(days=30),
         ),
-        [order_tag_dict['San Antonio'], order_tag_dict['Pending'], order_tag_dict['Dubbing']]
+        [order_tag_dict['San Antonio'],
+            order_tag_dict['Pending'], order_tag_dict['Dubbing']]
     ],
     [
         dict(
-            inventory=Inventory.objects.get(name='The Lord of the Rings: The Two Towers'),
+            inventory=Inventory.objects.get(
+                name='The Lord of the Rings: The Two Towers'),
             start_date=datetime.now(),
             embargo_date=datetime.now() - timedelta(days=30),
         ),
-        [order_tag_dict['Chicago'], order_tag_dict['Delivered'], order_tag_dict['Dubbing']]
+        [order_tag_dict['Chicago'], order_tag_dict['Delivered'],
+            order_tag_dict['Dubbing']]
     ],
     [
         dict(
-            inventory=Inventory.objects.get(name='The Lord of the Rings: The Return of the King'),
+            inventory=Inventory.objects.get(
+                name='The Lord of the Rings: The Return of the King'),
             start_date=datetime.now() + timedelta(days=5),
             embargo_date=datetime.now() + timedelta(days=30),
         ),
-        [order_tag_dict['Boston'], order_tag_dict['QC'], order_tag_dict['Subbing'], order_tag_dict['Transcription']]
+        [order_tag_dict['Boston'], order_tag_dict['QC'],
+            order_tag_dict['Subbing'], order_tag_dict['Transcription']]
     ],
     [
         dict(
@@ -842,7 +859,8 @@ orders = [
             start_date=datetime.now() + timedelta(days=15),
             embargo_date=datetime.now() + timedelta(days=30),
         ),
-        [order_tag_dict['New York'], order_tag_dict['Processing'], order_tag_dict['Dubbing'], order_tag_dict['Transcoding']]
+        [order_tag_dict['New York'], order_tag_dict['Processing'],
+            order_tag_dict['Dubbing'], order_tag_dict['Transcoding']]
     ],
     [
         dict(
@@ -851,9 +869,10 @@ orders = [
             embargo_date=datetime.now() + timedelta(days=30),
             is_active=False
         ),
-        [order_tag_dict['Los Angeles'], order_tag_dict['Cancelled'], order_tag_dict['Dubbing'], order_tag_dict['Transcoding']]
+        [order_tag_dict['Los Angeles'], order_tag_dict['Cancelled'],
+            order_tag_dict['Dubbing'], order_tag_dict['Transcoding']]
     ]
-    
+
 ]
 
 for order in orders:
